@@ -1,31 +1,30 @@
-import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
-
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import ClientLayout from "@/components/ClientLayout";
 
 const monaSans = Mona_Sans({
-    variable: "--font-mona-sans",
-    subsets: ["latin"],
+  subsets: ["latin"],
+  variable: "--font-mona-sans",
 });
 
 export const metadata: Metadata = {
-    title: "PrepWise",
-    description: "An AI-powered platform for preparing for mock interviews",
+  title: "PrepMind",
+  description: "Practice job interviews with AI",
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
+  children,
+}: Readonly<{
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en" className="dark">
-        <body className={`${monaSans.className} antialiased pattern`}>
-        {children}
-
+  return (
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${monaSans.className} antialiased pattern`}>
+        <ClientLayout>{children}</ClientLayout>
         <Toaster />
-        </body>
-        </html>
-    );
+      </body>
+    </html>
+  );
 }
